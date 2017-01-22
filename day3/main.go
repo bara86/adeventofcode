@@ -3,9 +3,10 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"os"
 	"regexp"
 	"strconv"
+
+	"../common"
 )
 
 func checkTriangle(numbers ...string) bool {
@@ -16,15 +17,6 @@ func checkTriangle(numbers ...string) bool {
 	}
 
 	return els[0]+els[1] > els[2] && els[0]+els[2] > els[1] && els[1]+els[2] > els[0]
-}
-
-func openFile() *os.File {
-	file, err := os.Open("numbers.txt")
-
-	if err != nil {
-		panic(err)
-	}
-	return file
 }
 
 func createRegexp() *regexp.Regexp {
@@ -41,7 +33,7 @@ func getLineElements(line string, reg *regexp.Regexp) []string {
 }
 
 func part1() {
-	file := openFile()
+	file := common.OpenFile("numbers.txt")
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
@@ -60,7 +52,7 @@ func part1() {
 }
 
 func part2() {
-	file := openFile()
+	file := common.OpenFile("numbers.txt")
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
